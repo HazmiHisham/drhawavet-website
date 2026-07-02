@@ -27,6 +27,13 @@
 .DS_Store
 *.pem
 
+# local/generated JSON files (keep required project config)
+*.json
+!package.json
+!package-lock.json
+!tsconfig.json
+!components.json
+
 # debug
 npm-debug.log*
 yarn-debug.log*
