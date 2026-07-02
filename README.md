@@ -16,6 +16,9 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 - `/` — Landing page with all sections
 - `/booking` — Standalone booking page
+- `/shop` — Shop (coming soon)
+- `/admin/login` — Admin login (demo)
+- `/admin` — Admin dashboard
 
 ## Tech Stack
 
@@ -45,3 +48,24 @@ All branch, service, and FAQ data lives in `src/lib/constants.ts`.
 ## Note
 
 This is a **frontend-only prototype**. No backend or database is connected.
+
+## Cloudflare Deploy
+
+This project uses [OpenNext for Cloudflare](https://opennext.js.org/cloudflare). Config is committed in `wrangler.jsonc` and `open-next.config.ts`.
+
+**Cloudflare dashboard settings:**
+
+| Setting | Value |
+|---------|-------|
+| Build command | `npm run deploy` |
+| Root directory | `drhawavet-web` (if repo root is parent folder) |
+
+Or split build/deploy:
+
+| Build command | `npx opennextjs-cloudflare build` |
+| Deploy command | `npx opennextjs-cloudflare deploy` |
+
+The worker name must be **`drhawavet-website`** — it must match the `WORKER_SELF_REFERENCE` service in `wrangler.jsonc`. A mismatch (e.g. `drhawavet-web` from `package.json`) causes deploy error `10143`.
+
+Local preview: `npm run preview`
+
