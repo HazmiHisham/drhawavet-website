@@ -4,44 +4,60 @@ export const BRANCHES = [
     name: "drhawavet Nilai",
     address: "No. 12, Jalan Nilai Square, 71800 Nilai, Negeri Sembilan",
     whatsapp: "https://wa.me/601110922031",
+    lat: 2.821192177553736,
+    lng: 101.78894374782178,
   },
   {
     id: "bangi",
     name: "drhawavet Bangi",
     address: "Lot 8, Jalan Medan Bangi, 43650 Bandar Baru Bangi, Selangor",
     whatsapp: "https://wa.me/60107989220",
+    lat: 2.9637990996368835,
+    lng: 101.76329939571912,
   },
   {
     id: "shah-alam",
     name: "drhawavet Shah Alam",
     address: "No. 45, Persiaran Kayangan, 40000 Shah Alam, Selangor",
     whatsapp: "https://wa.me/601110922013",
+    lat: 3.0896838563372415,
+    lng: 101.54481618217952,
   },
   {
     id: "sri-rampai",
     name: "drhawavet Sri Rampai",
     address: "No. 22, Jalan Sri Rampai 2, 53300 Kuala Lumpur",
     whatsapp: "https://wa.me/60122054220",
+    lat: 3.195776326178039,
+    lng: 101.7275803046247,
   },
   {
     id: "puchong",
     name: "drhawavet Puchong",
     address: "No. 18, Jalan Puchong Utama, 47100 Puchong, Selangor",
     whatsapp: "https://wa.me/60129174202",
+    lat: 2.9919081554267404,
+    lng: 101.61773578217954,
   },
   {
     id: "ampang",
     name: "drhawavet Ampang",
     address: "No. 7, Jalan Ampang Hilir, 55000 Kuala Lumpur",
     whatsapp: "https://wa.me/60122939220",
+    lat: 3.135002056010653,
+    lng: 101.7696072600223,
   },
   {
     id: "kota-damansara",
     name: "drhawavet Kota Damansara",
     address: "No. 33, Jalan Teknologi, 47810 Kota Damansara, Selangor",
     whatsapp: "https://wa.me/60127969220",
+    lat: 3.1521020178583297,
+    lng: 101.59122472328397,
   },
 ] as const;
+
+export type Branch = (typeof BRANCHES)[number];
 
 export const OPENING_HOURS = {
   title: "We Are Open Everyday",
