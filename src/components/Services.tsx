@@ -14,7 +14,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { SERVICES } from "@/lib/constants";
-import { AnimatedSection, AnimatedItem } from "@/components/animated-section";
+import { AnimatedSection, AnimatedItem, type SectionTone } from "@/components/animated-section";
 import { SectionHeader } from "@/components/section-header";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -31,11 +31,12 @@ const iconMap: Record<string, LucideIcon> = {
   Apple,
 };
 
-export function Services() {
+export function Services({ tone }: { tone?: SectionTone }) {
   return (
     <AnimatedSection
       id="services"
-      className="bg-gradient-to-b from-pink-50/50 to-white py-20 dark:from-pink-950/20 dark:to-background sm:py-28"
+      tone={tone}
+      className="py-20 sm:py-28"
       stagger
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

@@ -4,14 +4,14 @@ import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight, Star, Quote } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { TESTIMONIALS } from "@/lib/constants";
-import { AnimatedSection } from "@/components/animated-section";
+import { AnimatedSection, type SectionTone } from "@/components/animated-section";
 import { SectionHeader } from "@/components/section-header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
 const VISIBLE_COUNT = 3;
 
-export function Testimonials() {
+export function Testimonials({ tone }: { tone?: SectionTone }) {
   const [page, setPage] = useState(0);
   const [direction, setDirection] = useState(0);
   const totalPages = Math.max(1, TESTIMONIALS.length - VISIBLE_COUNT + 1);
@@ -32,7 +32,7 @@ export function Testimonials() {
   const visible = TESTIMONIALS.slice(page, page + VISIBLE_COUNT);
 
   return (
-    <AnimatedSection className="bg-gradient-to-b from-pink-50/50 to-white py-16 dark:from-pink-950/20 dark:to-background sm:py-20">
+    <AnimatedSection tone={tone} className="py-16 sm:py-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
           badge="Testimonials"

@@ -8,7 +8,7 @@ import {
   BOOKING_SERVICES,
   PET_TYPES,
 } from "@/lib/constants";
-import { AnimatedSection } from "@/components/animated-section";
+import { AnimatedSection, type SectionTone } from "@/components/animated-section";
 import { SectionHeader } from "@/components/section-header";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -33,9 +33,10 @@ import { saveBooking } from "@/lib/bookings";
 
 interface BookingFormProps {
   standalone?: boolean;
+  tone?: SectionTone;
 }
 
-export function BookingForm({ standalone = false }: BookingFormProps) {
+export function BookingForm({ standalone = false, tone }: BookingFormProps) {
   const [showSuccess, setShowSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const [petType, setPetType] = useState<string>("");
@@ -75,6 +76,7 @@ export function BookingForm({ standalone = false }: BookingFormProps) {
     <>
       <AnimatedSection
         id={standalone ? undefined : "booking"}
+        tone={tone}
         className="py-20 sm:py-28"
       >
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">

@@ -10,7 +10,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { WHY_CHOOSE_US } from "@/lib/constants";
-import { AnimatedSection, AnimatedItem } from "@/components/animated-section";
+import { AnimatedSection, AnimatedItem, type SectionTone } from "@/components/animated-section";
 import { SectionHeader } from "@/components/section-header";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -23,9 +23,9 @@ const iconMap: Record<string, LucideIcon> = {
   Clock,
 };
 
-export function WhyChooseUs() {
+export function WhyChooseUs({ tone }: { tone?: SectionTone }) {
   return (
-    <AnimatedSection className="py-20 sm:py-28" stagger>
+    <AnimatedSection tone={tone} className="py-20 sm:py-28" stagger>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <AnimatedItem>
           <SectionHeader

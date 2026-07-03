@@ -24,18 +24,28 @@ interface AnimatedSectionProps {
   className?: string;
   id?: string;
   stagger?: boolean;
+  tone?: SectionTone;
 }
+
+export type SectionTone = "colored" | "white";
+
+export const sectionToneClasses: Record<SectionTone, string> = {
+  colored:
+    "bg-gradient-to-b from-pink-100 via-pink-50 to-pink-100 dark:from-pink-950/80 dark:via-pink-900/55 dark:to-pink-950/70",
+  white: "bg-white dark:bg-slate-950",
+};
 
 export function AnimatedSection({
   children,
   className,
   id,
   stagger = false,
+  tone,
 }: AnimatedSectionProps) {
   return (
     <motion.section
       id={id}
-      className={cn(className)}
+      className={cn(tone && sectionToneClasses[tone], className)}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-80px" }}

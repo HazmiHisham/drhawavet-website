@@ -18,14 +18,14 @@ export default function HomePage() {
       <Navbar />
       <main>
         <Hero />
-        <About />
-        <Services />
-        <ImportantNotice />
-        <BookingForm />
-        <Branches />
-        <WhyChooseUs />
-        <Testimonials />
-        <FAQ />
+        <About tone="colored" />
+        <Services tone="white" />
+        <ImportantNotice tone="colored" />
+        <BookingForm tone="white" />
+        <Branches tone="colored" />
+        <WhyChooseUs tone="white" />
+        <Testimonials tone="colored" />
+        <FAQ tone="white" />
       </main>
       <Footer />
       <FloatingWhatsApp />

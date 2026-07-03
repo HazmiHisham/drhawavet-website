@@ -1,7 +1,7 @@
 "use client";
 
 import { FAQ_ITEMS } from "@/lib/constants";
-import { AnimatedSection } from "@/components/animated-section";
+import { AnimatedSection, type SectionTone } from "@/components/animated-section";
 import { SectionHeader } from "@/components/section-header";
 import {
   Accordion,
@@ -10,9 +10,9 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-export function FAQ() {
+export function FAQ({ tone }: { tone?: SectionTone }) {
   return (
-    <AnimatedSection id="faq" className="py-20 sm:py-28">
+    <AnimatedSection id="faq" tone={tone} className="py-20 sm:py-28">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
           badge="FAQ"

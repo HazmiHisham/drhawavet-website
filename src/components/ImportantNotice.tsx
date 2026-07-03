@@ -2,12 +2,12 @@
 
 import { AlertTriangle } from "lucide-react";
 import { NOTICE } from "@/lib/constants";
-import { AnimatedSection } from "@/components/animated-section";
+import { AnimatedSection, type SectionTone } from "@/components/animated-section";
 import { Badge } from "@/components/ui/badge";
 
-export function ImportantNotice() {
+export function ImportantNotice({ tone }: { tone?: SectionTone }) {
   return (
-    <AnimatedSection className="py-8">
+    <AnimatedSection tone={tone} className="py-8">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="relative overflow-hidden rounded-3xl border border-amber-200 bg-gradient-to-r from-amber-50 via-orange-50 to-amber-50 p-6 shadow-lg shadow-amber-500/10 dark:border-amber-900 dark:from-amber-950/50 dark:via-orange-950/30 dark:to-amber-950/50 sm:p-8">
           <div className="absolute -right-8 -top-8 size-32 rounded-full bg-amber-200/30 blur-2xl dark:bg-amber-800/20" />

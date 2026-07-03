@@ -2,18 +2,19 @@
 
 import { MapPin, MessageCircle, Clock } from "lucide-react";
 import { BRANCHES } from "@/lib/constants";
-import { AnimatedSection, AnimatedItem } from "@/components/animated-section";
+import { AnimatedSection, AnimatedItem, type SectionTone } from "@/components/animated-section";
 import { SectionHeader } from "@/components/section-header";
 import { OpeningHoursCard } from "@/components/OpeningHours";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
-export function Branches() {
+export function Branches({ tone }: { tone?: SectionTone }) {
   return (
     <AnimatedSection
       id="branches"
-      className="bg-gradient-to-b from-white to-pink-50/50 py-16 dark:from-background dark:to-slate-900/50 sm:py-20"
+      tone={tone}
+      className="py-16 sm:py-20"
       stagger
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
