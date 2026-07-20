@@ -174,12 +174,6 @@ export const ABOUT_FEATURES = [
   },
 ] as const;
 
-export const STATS = [
-  { value: "7", label: "Branches" },
-  { value: "Everyday", label: "Open Everyday" },
-  { value: "1000+", label: "Happy Pets" },
-] as const;
-
 export const WHY_CHOOSE_US = [
   {
     title: "Experienced Doctors",
@@ -267,8 +261,22 @@ export const FAQ_ITEMS = [
   },
 ] as const;
 
+export const CLIENTS = [
+  { id: "client-1", image: "/images/clients/client-1.jpg", alt: "Orange cat client at DRHAWAVET" },
+  { id: "client-2", image: "/images/clients/client-2.jpg", alt: "Pet client at DRHAWAVET" },
+  { id: "client-3", image: "/images/clients/client-3.jpg", alt: "Pet client at DRHAWAVET" },
+  { id: "client-4", image: "/images/clients/client-4.jpg", alt: "Pet client at DRHAWAVET" },
+  { id: "client-5", image: "/images/clients/client-5.jpg", alt: "Pet client at DRHAWAVET" },
+  { id: "client-6", image: "/images/clients/client-6.jpg", alt: "Pet client at DRHAWAVET" },
+  { id: "client-7", image: "/images/clients/client-7.jpg", alt: "Pet client at DRHAWAVET" },
+  { id: "client-8", image: "/images/clients/client-8.jpg", alt: "Pet client at DRHAWAVET" },
+  { id: "client-9", image: "/images/clients/client-9.jpg", alt: "Pet client at DRHAWAVET" },
+  { id: "client-10", image: "/images/clients/client-10.jpg", alt: "Pet client at DRHAWAVET" },
+] as const;
+
 export const NAV_LINKS = [
   { label: "About", href: "#about" },
+  { label: "Clients", href: "#clients" },
   { label: "Services", href: "#services" },
   { label: "Booking", href: "#booking" },
   { label: "Branches", href: "#branches" },
@@ -286,7 +294,45 @@ export const FOOTER_SERVICES = [
 
 export const WHATSAPP_LINK = "https://wa.me/60000000000";
 
+export const TRADEMARK = "DRHAWAVET YOUR CAT'S CHOICE 😻";
+
+export const HERO_SLIDES = [
+  {
+    id: "welcome",
+    headline: "Gentle care cats trust",
+    description:
+      "Expert veterinary care, grooming, and wellness — because your cat deserves the best.",
+    image: "/images/hero-slide-2.jpg",
+    imageAlt: "Happy cat and dog resting together",
+  },
+  {
+    id: "nilai-branch",
+    headline: "Meet our Nilai team",
+    description:
+      "Friendly faces ready to care for your cats — visit our Nilai branch today.",
+    image: "/images/nilai-branch.png",
+    imageAlt: "DRHAWAVET Nilai branch team",
+  },
+  {
+    id: "care",
+    headline: "Caring for pets like family",
+    description:
+      "Consultation, vaccination, surgery, and wellness under one trusted roof.",
+    image: "/images/hero-slide.jpg",
+    imageAlt: "Happy cat and dog resting together",
+  },
+  {
+    id: "branches",
+    headline: "7 branches · open everyday",
+    description:
+      "Walk-in welcome across Malaysia. Book grooming and neuter in advance.",
+    image: "/images/petimage.png",
+    imageAlt: "Happy cat and dog resting together",
+  },
+] as const;
+
 export const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/drhawa.vet/",
   tiktok: "https://www.tiktok.com/@drhawa.vet",
+  facebook: "https://www.facebook.com/drhawa.vet",
 } as const;

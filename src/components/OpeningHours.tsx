@@ -3,6 +3,7 @@
 import { Clock, Coffee, UserCheck } from "lucide-react";
 import { OPENING_HOURS } from "@/lib/constants";
 import { Card, CardContent } from "@/components/ui/card";
+import { useI18n } from "@/i18n/locale-context";
 import { cn } from "@/lib/utils";
 
 interface OpeningHoursCardProps {
@@ -10,6 +11,8 @@ interface OpeningHoursCardProps {
 }
 
 export function OpeningHoursCard({ className }: OpeningHoursCardProps) {
+  const { dict } = useI18n();
+
   return (
     <Card
       className={cn(
@@ -23,7 +26,7 @@ export function OpeningHoursCard({ className }: OpeningHoursCardProps) {
         </div>
 
         <h3 className="text-xl font-bold text-foreground sm:text-2xl">
-          {OPENING_HOURS.title}
+          {dict.openingHours.title}
         </h3>
         <p className="mt-2 text-2xl font-bold text-pink-500 dark:text-pink-400">
           {OPENING_HOURS.hours}
@@ -34,7 +37,7 @@ export function OpeningHoursCard({ className }: OpeningHoursCardProps) {
             <UserCheck className="mt-0.5 size-4 shrink-0 text-pink-500" />
             <div>
               <p className="text-xs font-medium text-muted-foreground">
-                Last Registration
+                {dict.openingHours.lastRegistration}
               </p>
               <p className="text-sm font-semibold text-foreground">
                 {OPENING_HOURS.lastRegistration}
@@ -45,7 +48,7 @@ export function OpeningHoursCard({ className }: OpeningHoursCardProps) {
             <Coffee className="mt-0.5 size-4 shrink-0 text-pink-400" />
             <div>
               <p className="text-xs font-medium text-muted-foreground">
-                Break Time
+                {dict.openingHours.breakTime}
               </p>
               <p className="text-sm font-semibold text-foreground">
                 {OPENING_HOURS.breakTime}

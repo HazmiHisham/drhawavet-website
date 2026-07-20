@@ -35,3 +35,16 @@ export function TikTokIcon({ className }: SocialIconProps) {
     </svg>
   );
 }
+
+export function FacebookIcon({ className }: SocialIconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={cn("size-4", className)}
+      aria-hidden="true"
+    >
+      <path d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14C17.18 2.09 16.09 2 14.93 2 12.23 2 10.5 3.65 10.5 6.7v2.8H8v4h2.5V22h3.5z" />
+    </svg>
+  );
+}

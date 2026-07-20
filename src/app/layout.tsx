@@ -10,14 +10,15 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "DRHAWAVET Clinic | Professional Veterinary Care in Malaysia",
+  title: "DRHAWAVET YOUR CAT'S CHOICE | Professional Veterinary Care in Malaysia",
   description:
-    "Professional veterinary care, grooming, vaccination, surgery and pet wellness services. 7 branches open everyday across Malaysia.",
+    "DRHAWAVET YOUR CAT'S CHOICE — professional veterinary care, grooming, vaccination, surgery and pet wellness services. 7 branches open everyday across Malaysia.",
   keywords: [
     "veterinary clinic",
     "pet care",
     "Malaysia",
     "DRHAWAVET",
+    "DRHAWAVET YOUR CAT'S CHOICE",
     "grooming",
     "vaccination",
   ],

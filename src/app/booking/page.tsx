@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
@@ -5,8 +7,11 @@ import { BookingForm } from "@/components/BookingForm";
 import { Footer } from "@/components/Footer";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { BackToTop } from "@/components/BackToTop";
+import { useI18n } from "@/i18n/locale-context";
 
 export default function BookingPage() {
+  const { dict } = useI18n();
+
   return (
     <>
       <Navbar />
@@ -17,7 +22,7 @@ export default function BookingPage() {
             className="inline-flex items-center gap-2 text-sm font-medium text-pink-500 transition-colors hover:text-pink-400 dark:text-pink-400"
           >
             <ArrowLeft className="size-4" />
-            Back to Home
+            {dict.bookingPage.backHome}
           </Link>
         </div>
         <BookingForm standalone />

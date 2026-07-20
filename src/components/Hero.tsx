@@ -1,12 +1,35 @@
 "use client";
 
-import Link from "next/link";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { ArrowRight, Phone } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowRight, ChevronLeft, ChevronRight, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { HERO_SLIDES } from "@/lib/constants";
+import { useI18n } from "@/i18n/locale-context";
+import { cn } from "@/lib/utils";
+
+const SLIDE_INTERVAL_MS = 6000;
 
 export function Hero() {
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const slide = HERO_SLIDES[index];
+  const { dict } = useI18n();
+  const slideCopy = dict.hero.slides[slide.id as keyof typeof dict.hero.slides];
+
+  useEffect(() => {
+    if (paused) return;
+    const timer = window.setInterval(() => {
+      setIndex((current) => (current + 1) % HERO_SLIDES.length);
+    }, SLIDE_INTERVAL_MS);
+    return () => window.clearInterval(timer);
+  }, [paused, index]);
+
+  const goTo = (next: number) => {
+    setIndex((next + HERO_SLIDES.length) % HERO_SLIDES.length);
+  };
+
   const scrollToBooking = () => {
     document.querySelector("#booking")?.scrollIntoView({ behavior: "smooth" });
   };
@@ -16,112 +39,138 @@ export function Hero() {
   };
 
   return (
-    <section className="relative min-h-screen overflow-hidden pt-18">
-      <div className="absolute inset-0 bg-gradient-to-br from-pink-50 via-white to-pink-50 dark:from-slate-950 dark:via-slate-900 dark:to-pink-950/30" />
-      <div
-        className="absolute inset-0 opacity-[0.35] dark:opacity-[0.15]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23fbcfe8' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }}
-      />
-      <div className="absolute -right-32 top-20 h-96 w-96 rounded-full bg-pink-200/40 blur-3xl dark:bg-pink-900/20" />
-      <div className="absolute -left-32 bottom-20 h-80 w-80 rounded-full bg-pink-200/40 blur-3xl dark:bg-pink-900/20" />
-
-      <div className="relative mx-auto flex max-w-7xl flex-col items-stretch gap-12 px-4 pb-20 pt-28 sm:px-6 lg:flex-row lg:items-center lg:gap-16 lg:px-8 lg:pt-32">
+    <section
+      className="relative h-[100svh] min-h-[560px] overflow-hidden"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      aria-roledescription="carousel"
+      aria-label={dict.hero.ariaLabel}
+    >
+      <AnimatePresence mode="wait">
         <motion.div
-          className="flex-1 text-center lg:text-left"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          key={slide.id}
+          className="absolute inset-0"
+          initial={{ opacity: 0, scale: 1.04 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 1.02 }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
         >
-          <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-pink-200 bg-white/80 px-4 py-1.5 text-sm font-medium text-pink-500 shadow-sm backdrop-blur-sm dark:border-pink-800 dark:bg-pink-950/50 dark:text-pink-300">
-            <span className="size-2 rounded-full bg-pink-500 animate-pulse" />
-            Trusted Veterinary Care in Malaysia
-          </span>
+          <Image
+            src={slide.image}
+            alt={slideCopy?.imageAlt ?? slide.imageAlt}
+            fill
+            priority={index === 0}
+            sizes="100vw"
+            className="object-cover object-[35%_center] sm:object-center"
+          />
+        </motion.div>
+      </AnimatePresence>
 
-          <h1 className="text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-            Caring for Your Pets{" "}
-            <span className="bg-gradient-to-r from-pink-500 to-pink-400 bg-clip-text text-transparent">
-              Like Family
-            </span>
-          </h1>
+      <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-950/55 to-slate-950/25" />
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-slate-950/35" />
 
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground lg:mx-0 mx-auto">
-            Professional veterinary care, grooming, vaccination, surgery and pet
-            wellness services.
-          </p>
-
-          <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row lg:justify-start">
-            <Button
-              onClick={scrollToBooking}
-              size="lg"
-              className="h-12 rounded-full bg-gradient-to-r from-pink-400 to-pink-300 px-8 text-base font-semibold shadow-xl shadow-pink-500/30 hover:from-pink-500 hover:to-pink-400"
+      <div className="relative z-10 flex h-full items-end pb-24 pt-28 sm:items-center sm:pb-0 sm:pt-20">
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`${slide.id}-${dict.brand.tagline}`}
+              className="max-w-2xl"
+              initial={{ opacity: 0, y: 28 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
             >
-              Book Appointment
-              <ArrowRight className="ml-1 size-4" />
-            </Button>
-            <Button
-              onClick={scrollToContact}
-              variant="outline"
-              size="lg"
-              className="h-12 rounded-full border-pink-200 px-8 text-base font-semibold hover:bg-pink-50 dark:border-pink-800 dark:hover:bg-pink-950/50"
-            >
-              <Phone className="size-4" />
-              Contact Us
-            </Button>
-          </div>
+              <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
+                <span className="block">{dict.brand.name}</span>
+                <span className="mt-2 block bg-gradient-to-r from-pink-200 to-pink-100 bg-clip-text text-transparent">
+                  {dict.brand.tagline}
+                </span>
+              </h1>
+              <span className="sr-only">{dict.brand.trademark}</span>
 
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-8 lg:justify-start">
-            {[
-              { value: "7", label: "Branches" },
-              { value: "10AM–6PM", label: "Open Daily" },
-              { value: "1000+", label: "Happy Pets" },
-            ].map((stat) => (
-              <div key={stat.label} className="text-center lg:text-left">
-                <p className="text-2xl font-bold text-pink-500 dark:text-pink-400">
-                  {stat.value}
-                </p>
-                <p className="text-sm text-muted-foreground">{stat.label}</p>
+              <p className="mt-5 text-xl font-medium tracking-tight text-white/95 sm:text-2xl">
+                {slideCopy?.headline ?? slide.headline}
+              </p>
+
+              <p className="mt-4 max-w-lg text-base leading-relaxed text-white/75 sm:text-lg">
+                {slideCopy?.description ?? slide.description}
+              </p>
+
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <Button
+                  onClick={scrollToBooking}
+                  size="lg"
+                  className="h-12 rounded-full bg-gradient-to-r from-pink-400 to-pink-300 px-8 text-base font-semibold text-white shadow-xl shadow-pink-500/30 hover:from-pink-500 hover:to-pink-400"
+                >
+                  {dict.hero.bookAppointment}
+                  <ArrowRight className="ml-1 size-4" />
+                </Button>
+                <Button
+                  onClick={scrollToContact}
+                  variant="outline"
+                  size="lg"
+                  className="h-12 rounded-full border-white/40 bg-white/10 px-8 text-base font-semibold text-white backdrop-blur-sm hover:bg-white/20 hover:text-white"
+                >
+                  <Phone className="size-4" />
+                  {dict.hero.contactUs}
+                </Button>
               </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+
+      <div className="absolute inset-x-0 bottom-0 z-20">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 pb-6 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-2" role="tablist" aria-label="Hero slides">
+            {HERO_SLIDES.map((item, i) => (
+              <button
+                key={item.id}
+                type="button"
+                role="tab"
+                aria-selected={i === index}
+                aria-label={`${dict.hero.goToSlide} ${i + 1}`}
+                onClick={() => goTo(i)}
+                className={cn(
+                  "h-1.5 rounded-full transition-all duration-300",
+                  i === index
+                    ? "w-10 bg-pink-300"
+                    : "w-5 bg-white/40 hover:bg-white/70"
+                )}
+              />
             ))}
           </div>
-        </motion.div>
+
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              aria-label={dict.hero.prevSlide}
+              onClick={() => goTo(index - 1)}
+              className="flex size-10 items-center justify-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur-sm transition-colors hover:bg-white/20"
+            >
+              <ChevronLeft className="size-5" />
+            </button>
+            <button
+              type="button"
+              aria-label={dict.hero.nextSlide}
+              onClick={() => goTo(index + 1)}
+              className="flex size-10 items-center justify-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur-sm transition-colors hover:bg-white/20"
+            >
+              <ChevronRight className="size-5" />
+            </button>
+          </div>
+        </div>
 
         <motion.div
-          className="relative mx-auto w-full max-w-md sm:max-w-lg lg:mx-0 lg:max-w-xl lg:flex-1"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <div className="relative w-full">
-            <div className="absolute inset-4 rounded-[2rem] bg-gradient-to-br from-pink-400/20 to-pink-300/20 blur-2xl" />
-            <div className="relative overflow-hidden rounded-[2rem] border border-white/60 bg-white/40 p-3 shadow-2xl shadow-pink-500/10 backdrop-blur-md dark:border-white/10 dark:bg-white/5">
-              <div className="relative aspect-square w-full overflow-hidden rounded-[1.5rem]">
-                <Image
-                  src="/images/petimage.png"
-                  alt="Happy veterinarian with dog and cat"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 512px"
-                  className="object-cover"
-                  priority
-                />
-              </div>
-            </div>
-            <motion.div
-              className="absolute -bottom-4 -left-4 rounded-2xl border border-white/60 bg-white/90 px-5 py-4 shadow-xl backdrop-blur-md dark:border-white/10 dark:bg-slate-900/90"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.6 }}
-            >
-              <p className="text-sm font-semibold text-foreground">
-                Compassionate Care
-              </p>
-              <p className="text-xs text-muted-foreground">
-                Experienced vets & modern facilities
-              </p>
-            </motion.div>
-          </div>
-        </motion.div>
+          key={index}
+          className="h-0.5 origin-left bg-pink-300/90"
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: paused ? 0 : 1 }}
+          transition={{
+            duration: paused ? 0.2 : SLIDE_INTERVAL_MS / 1000,
+            ease: "linear",
+          }}
+        />
       </div>
     </section>
   );

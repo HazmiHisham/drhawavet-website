@@ -1,6 +1,7 @@
 "use client";
 
 import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { LocaleProvider } from "@/i18n/locale-context";
 
 export function ThemeProvider({
   children,
@@ -9,7 +10,7 @@ export function ThemeProvider({
 }) {
   return (
     <NextThemesProvider attribute="class" defaultTheme="light" enableSystem>
-      {children}
+      <LocaleProvider>{children}</LocaleProvider>
     </NextThemesProvider>
   );
 }

@@ -3,6 +3,7 @@
 import { ExternalLink, MapPin } from "lucide-react";
 import type { Branch } from "@/lib/constants";
 import { buttonVariants } from "@/components/ui/button";
+import { useI18n } from "@/i18n/locale-context";
 import { cn } from "@/lib/utils";
 
 interface BranchMapProps {
@@ -19,6 +20,7 @@ function getMapDirectionsUrl(lat: number, lng: number) {
 }
 
 export function BranchMap({ branch, className }: BranchMapProps) {
+  const { dict } = useI18n();
   const embedUrl = getMapEmbedUrl(branch.lat, branch.lng);
   const directionsUrl = getMapDirectionsUrl(branch.lat, branch.lng);
 
@@ -53,7 +55,7 @@ export function BranchMap({ branch, className }: BranchMapProps) {
           )}
         >
           <ExternalLink className="size-3" />
-          Directions
+          {dict.branches.directions}
         </a>
       </div>
 
@@ -80,7 +82,7 @@ export function BranchMap({ branch, className }: BranchMapProps) {
           )}
         >
           <ExternalLink className="size-4" />
-          Get Directions
+          {dict.branches.getDirections}
         </a>
       </div>
     </div>

@@ -9,6 +9,7 @@ import { OpeningHoursCard } from "@/components/OpeningHours";
 import { BranchMap } from "@/components/branch-map";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { useI18n } from "@/i18n/locale-context";
 import { cn } from "@/lib/utils";
 
 function getBranchLabel(name: string) {
@@ -21,6 +22,7 @@ export function Branches({ tone }: { tone?: SectionTone }) {
   );
   const selectedBranch =
     BRANCHES.find((branch) => branch.id === selectedBranchId) ?? BRANCHES[0];
+  const { dict } = useI18n();
 
   return (
     <AnimatedSection
@@ -32,15 +34,15 @@ export function Branches({ tone }: { tone?: SectionTone }) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <AnimatedItem>
           <SectionHeader
-            badge="Locations"
-            title="Our Branches"
-            description="Seven convenient locations across the Klang Valley. Select a branch to view it on the map."
+            badge={dict.branches.badge}
+            title={dict.branches.title}
+            description={dict.branches.description}
           />
         </AnimatedItem>
 
         <AnimatedItem>
           <div className="grid items-stretch gap-4 lg:grid-cols-[minmax(10rem,1fr)_minmax(0,2fr)_minmax(11rem,1fr)] lg:gap-5 xl:grid-cols-[minmax(11rem,1fr)_2.2fr_minmax(12rem,1fr)]">
-            <div className="flex flex-col gap-1.5">
+            <div className="grid grid-cols-2 gap-1.5 sm:gap-2 lg:flex lg:flex-col">
               {BRANCHES.map((branch) => {
                 const isSelected = branch.id === selectedBranchId;
                 const showDetails = isSelected;
@@ -58,20 +60,20 @@ export function Branches({ tone }: { tone?: SectionTone }) {
                       }
                     }}
                     className={cn(
-                      "group cursor-pointer overflow-hidden border-border/60 bg-white/70 shadow-sm backdrop-blur-sm transition-all duration-300 hover:border-pink-200 hover:shadow-md hover:shadow-pink-500/10 dark:bg-slate-900/70 dark:hover:border-pink-800",
+                      "group cursor-pointer overflow-hidden border-border/60 bg-white/70 shadow-sm backdrop-blur-sm transition-all duration-300 hover:shadow-md hover:shadow-pink-500/10 dark:bg-slate-900/70",
                       isSelected &&
-                        "border-pink-400 bg-pink-50/80 shadow-md shadow-pink-500/15 ring-2 ring-pink-300/60 dark:border-pink-600 dark:bg-pink-950/40 dark:ring-pink-700/50"
+                        "border-pink-400 bg-pink-50/80 shadow-md shadow-pink-500/15 ring-2 ring-pink-400 dark:border-pink-400 dark:bg-pink-950/40 dark:ring-pink-400"
                     )}
                   >
-                    <CardContent className="p-2.5">
-                      <div className="flex items-center gap-1.5">
+                    <CardContent className="p-2 sm:p-2.5">
+                      <div className="flex items-center gap-1 sm:gap-1.5">
                         <MapPin
                           className={cn(
-                            "size-3 shrink-0 text-pink-400 opacity-0 transition-opacity duration-300 group-hover:opacity-100",
+                            "size-2.5 shrink-0 text-pink-400 opacity-0 transition-opacity duration-300 group-hover:opacity-100 sm:size-3",
                             showDetails && "opacity-100"
                           )}
                         />
-                        <h3 className="truncate text-xs font-semibold text-foreground">
+                        <h3 className="truncate text-[11px] font-semibold leading-tight text-foreground sm:text-xs">
                           {getBranchLabel(branch.name)}
                         </h3>
                       </div>
@@ -80,12 +82,12 @@ export function Branches({ tone }: { tone?: SectionTone }) {
                         className={cn(
                           "grid transition-all duration-300 ease-out",
                           showDetails
-                            ? "mt-2 grid-rows-[1fr] opacity-100"
-                            : "grid-rows-[0fr] opacity-0 group-hover:mt-2 group-hover:grid-rows-[1fr] group-hover:opacity-100"
+                            ? "mt-1.5 grid-rows-[1fr] opacity-100 sm:mt-2"
+                            : "grid-rows-[0fr] opacity-0 group-hover:mt-1.5 group-hover:grid-rows-[1fr] group-hover:opacity-100 sm:group-hover:mt-2"
                         )}
                       >
                         <div className="overflow-hidden">
-                          <p className="text-[10px] leading-relaxed text-muted-foreground">
+                          <p className="line-clamp-2 text-[9px] leading-relaxed text-muted-foreground sm:text-[10px]">
                             {branch.address}
                           </p>
                           <a
@@ -95,11 +97,11 @@ export function Branches({ tone }: { tone?: SectionTone }) {
                             onClick={(e) => e.stopPropagation()}
                             className={cn(
                               buttonVariants({ variant: "outline", size: "xs" }),
-                              "mt-2 h-6 w-full rounded-full border-pink-200 px-2 text-[10px] hover:bg-pink-50 dark:border-pink-800 dark:hover:bg-pink-950/50"
+                              "mt-1.5 h-5 w-full rounded-full border-pink-200 px-1.5 text-[9px] hover:bg-pink-50 sm:mt-2 sm:h-6 sm:px-2 sm:text-[10px] dark:border-pink-800 dark:hover:bg-pink-950/50"
                             )}
                           >
-                            <MessageCircle className="size-2.5" />
-                            Contact
+                            <MessageCircle className="size-2 sm:size-2.5" />
+                            {dict.branches.contact}
                           </a>
                         </div>
                       </div>

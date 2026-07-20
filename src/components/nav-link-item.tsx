@@ -15,6 +15,7 @@ interface NavLinkItemProps {
   onNavigate?: () => void;
   onScrollTo?: (href: string) => void;
   className?: string;
+  soonLabel?: string;
 }
 
 export function NavLinkItem({
@@ -22,6 +23,7 @@ export function NavLinkItem({
   onNavigate,
   onScrollTo,
   className,
+  soonLabel = "Soon",
 }: NavLinkItemProps) {
   const label = (
     <span className="inline-flex items-center gap-1.5">
@@ -31,7 +33,7 @@ export function NavLinkItem({
           variant="outline"
           className="rounded-full border-pink-200 bg-pink-50 px-1.5 py-0 text-[10px] font-semibold uppercase tracking-wide text-pink-500 dark:border-pink-800 dark:bg-pink-950/50 dark:text-pink-300"
         >
-          Soon
+          {soonLabel}
         </Badge>
       )}
     </span>

@@ -128,3 +128,36 @@
     @apply font-sans scroll-smooth;
   }
 }
+
+@keyframes clients-marquee-ltr {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.clients-marquee-track {
+  animation: clients-marquee-ltr 35s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .clients-marquee-track {
+    animation: none;
+    transform: none;
+  }
+}
+
+.services-carousel {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overscroll-behavior-x: contain;
+}
+
+.services-carousel::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+  background: transparent;
+}

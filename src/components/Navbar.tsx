@@ -8,7 +8,9 @@ import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { NavLinkItem, navLinkClassName } from "@/components/nav-link-item";
+import { LocaleSwitcher } from "@/components/LocaleSwitcher";
 import { NAV_LINKS } from "@/lib/constants";
+import { useI18n } from "@/i18n/locale-context";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
@@ -16,6 +18,17 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const { dict } = useI18n();
+
+  const navLabels: Record<string, string> = {
+    "#about": dict.nav.about,
+    "#clients": dict.nav.clients,
+    "#services": dict.nav.services,
+    "#booking": dict.nav.booking,
+    "#branches": dict.nav.branches,
+    "/shop": dict.nav.shop,
+    "#faq": dict.nav.faq,
+  };
 
   useEffect(() => {
     setMounted(true);
@@ -57,9 +70,11 @@ export function Navbar() {
           />
           <div className="hidden sm:block">
             <p className="text-sm font-bold leading-none text-foreground">
-              DRHAWAVET
+              {dict.brand.name}
             </p>
-            <p className="text-xs text-muted-foreground">Clinic</p>
+            <p className="text-xs text-pink-500 dark:text-pink-300">
+              {dict.brand.tagline}
+            </p>
           </div>
         </Link>
 
@@ -67,7 +82,12 @@ export function Navbar() {
           {NAV_LINKS.map((link) => (
             <NavLinkItem
               key={link.href}
-              link={link}
+              link={{
+                ...link,
+                label: navLabels[link.href] ?? link.label,
+                comingSoon: "comingSoon" in link ? link.comingSoon : undefined,
+              }}
+              soonLabel={dict.nav.soon}
               onScrollTo={scrollTo}
               className={navLinkClassName()}
             />
@@ -75,12 +95,14 @@ export function Navbar() {
         </div>
 
         <div className="flex items-center gap-2">
+          <LocaleSwitcher />
+
           {mounted && (
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              aria-label="Toggle dark mode"
+              aria-label={dict.nav.toggleTheme}
               className="rounded-full"
             >
               {theme === "dark" ? (
@@ -95,7 +117,7 @@ export function Navbar() {
             href="/booking"
             className="hidden h-9 items-center justify-center rounded-full bg-gradient-to-r from-pink-400 to-pink-300 px-5 text-sm font-semibold text-white shadow-lg shadow-pink-500/25 transition-all hover:from-pink-500 hover:to-pink-400 sm:inline-flex"
           >
-            Book Appointment
+            {dict.nav.bookAppointment}
           </Link>
 
           <Sheet open={open} onOpenChange={setOpen}>
@@ -107,12 +129,18 @@ export function Navbar() {
               }
             />
             <SheetContent side="right" className="w-80">
-              <SheetTitle className="sr-only">Navigation menu</SheetTitle>
+              <SheetTitle className="sr-only">{dict.nav.menu}</SheetTitle>
               <div className="mt-8 flex flex-col gap-2">
                 {NAV_LINKS.map((link) => (
                   <NavLinkItem
                     key={link.href}
-                    link={link}
+                    link={{
+                      ...link,
+                      label: navLabels[link.href] ?? link.label,
+                      comingSoon:
+                        "comingSoon" in link ? link.comingSoon : undefined,
+                    }}
+                    soonLabel={dict.nav.soon}
                     onNavigate={() => setOpen(false)}
                     onScrollTo={scrollTo}
                     className={navLinkClassName(true)}
@@ -123,7 +151,7 @@ export function Navbar() {
                   onClick={() => setOpen(false)}
                   className="mt-4 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-pink-400 to-pink-300 px-4 py-3 text-sm font-semibold text-white shadow-lg"
                 >
-                  Book Appointment
+                  {dict.nav.bookAppointment}
                 </Link>
               </div>
             </SheetContent>

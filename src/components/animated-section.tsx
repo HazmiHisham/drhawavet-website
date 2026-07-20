@@ -4,18 +4,28 @@ import { motion, type Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const fadeUpVariants: Variants = {
-  hidden: { opacity: 0, y: 32 },
+  hidden: { opacity: 0, y: 48 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+const fadeScaleVariants: Variants = {
+  hidden: { opacity: 0, y: 28, scale: 0.96 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
 const staggerContainer: Variants = {
   hidden: {},
   visible: {
-    transition: { staggerChildren: 0.1, delayChildren: 0.05 },
+    transition: { staggerChildren: 0.12, delayChildren: 0.08 },
   },
 };
 
@@ -35,6 +45,8 @@ export const sectionToneClasses: Record<SectionTone, string> = {
   white: "bg-white dark:bg-slate-950",
 };
 
+const viewport = { once: true, amount: 0.2, margin: "0px 0px -60px 0px" } as const;
+
 export function AnimatedSection({
   children,
   className,
@@ -48,8 +60,8 @@ export function AnimatedSection({
       className={cn(tone && sectionToneClasses[tone], className)}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-80px" }}
-      variants={stagger ? staggerContainer : fadeUpVariants}
+      viewport={viewport}
+      variants={stagger ? staggerContainer : fadeScaleVariants}
     >
       {children}
     </motion.section>
@@ -80,10 +92,10 @@ export function AnimatedScale({
   return (
     <motion.div
       className={cn(className)}
-      initial={{ opacity: 0, scale: 0.92 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      initial={{ opacity: 0, scale: 0.92, y: 24 }}
+      whileInView={{ opacity: 1, scale: 1, y: 0 }}
+      viewport={viewport}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
     </motion.div>

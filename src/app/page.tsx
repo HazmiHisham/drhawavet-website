@@ -2,6 +2,7 @@ import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { About } from "@/components/About";
 import { Services } from "@/components/Services";
+import { OurClients } from "@/components/OurClients";
 import { ImportantNotice } from "@/components/ImportantNotice";
 import { BookingForm } from "@/components/BookingForm";
 import { Branches } from "@/components/Branches";
@@ -19,13 +20,14 @@ export default function HomePage() {
       <main>
         <Hero />
         <About tone="colored" />
-        <Services tone="white" />
-        <ImportantNotice tone="colored" />
-        <BookingForm tone="white" />
-        <Branches tone="colored" />
-        <WhyChooseUs tone="white" />
-        <Testimonials tone="colored" />
-        <FAQ tone="white" />
+        <OurClients tone="white" />
+        <Services tone="colored" />
+        <ImportantNotice tone="white" />
+        <BookingForm tone="colored" />
+        <Branches tone="white" />
+        <WhyChooseUs tone="colored" />
+        <Testimonials tone="white" />
+        <FAQ tone="colored" />
       </main>
       <Footer />
       <FloatingWhatsApp />
